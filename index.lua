@@ -5,7 +5,7 @@ function _init()
 end
 
 function _update()
-	move_player();
+	move_and_listen_to_player();
 	move_cave();
 end
 

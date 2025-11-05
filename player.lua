@@ -2,7 +2,7 @@ function make_player()
 	player = {
 		x = 24,
 		y = 60,
-		dy = -2, --fall speed
+		dy = -1, --fall speed
 		rise = 2,
 		fall = 3,
 		dead = 4,
@@ -11,13 +11,11 @@ function make_player()
 	};
 end
 
-function move_player()
-	gravity = 0.1;
+function move_and_listen_to_player()
+	gravity = 0.15;
 	player.dy += gravity;
 
-	if (btnp(2)) then
-		player.dy -= 1;
-	end
+	if (btnp(2)) then player.dy -= 1.5;
 
 	player.y += player.dy;
 end

@@ -1,58 +1,51 @@
 function make_cave()
-	cave_color = 1;
+	columns = {};
 
-	upper_columns = {};
-	bottom_columns = {};
-
-	min_height = 10;
 	column_width = 2;
 
-	for i=1,128/4 do
-		new_upper_height = rnd(20);
-		new_bottom_height = rnd(20);
-
-		add_cave_column(
-			new_upper_height,
-			new_bottom_height
-		);
+	for i=1,128/column_width do
+		add_cave_column();
 	end
 end
 
-function add_cave_column(upper_height, bottom_height)
+function add_cave_column()
+	local min_height = 10;
+
+	local new_upper_height = flr(rnd(20));
+	local new_bottom_height = flr(rnd(20));
+
+	local new_column = {
+		up = min_height + new_upper_height,
+		down = min_height + new_bottom_height
+	};
+
 	for i=1,column_width do
-		add(upper_columns,min_height + upper_height);
-		add(bottom_columns,min_height + bottom_height);
+		add(columns, new_column);
 	end
 end
 
 function move_cave()
-	del(
-		upper_columns,
-		upper_columns[#upper_columns]
-	);
+	-- delete first column
+	for i=1,column_width do
+		del(columns, columns[1]);
+	end
 
-	-- add_cave_column(rnd(20), rnd(20));
-	-- add_cave_column(rnd(20), rnd(20));
-	
-	-- del(
-	-- 	upper_columns,
-	-- 	upper_columns[2]
-	-- );
+	add_cave_column();
 end
 
 function draw_cave()
-	for i=1,#upper_columns do
+	local cave_color = 1;
+
+	for i=1,#columns do
 		line(
 			i-1, 0,
-			i-1, upper_columns[i],
+			i-1, columns[i].up,
 			cave_color
 		);
-	end
-	
-	for i=1,#bottom_columns do
+
 		line(
 			i-1, 127,
-			i-1, 127 - upper_columns[i],
+			i-1, 127 - columns[i].down,
 			cave_color
 		);
 	end
