@@ -1,5 +1,7 @@
 function make_cave()
-	columns = {};
+	columns = {
+		{ top = 30, bottom = 30 }
+	};
 
 	column_width = 2;
 
@@ -11,12 +13,11 @@ end
 function add_cave_column()
 	local min_height = 10;
 
-	local new_upper_height = flr(rnd(20));
 	local new_bottom_height = flr(rnd(20));
 
 	local new_column = {
-		up = min_height + new_upper_height,
-		down = min_height + new_bottom_height
+		top = columns[#columns].top + flr(-3 + rnd(6)),
+		bottom = columns[#columns].bottom + flr(-3 + rnd(6))
 	};
 
 	for i=1,column_width do
@@ -39,13 +40,13 @@ function draw_cave()
 	for i=1,#columns do
 		line(
 			i-1, 0,
-			i-1, columns[i].up,
+			i-1, columns[i].top,
 			cave_color
 		);
 
 		line(
 			i-1, 127,
-			i-1, 127 - columns[i].down,
+			i-1, 127 - columns[i].bottom,
 			cave_color
 		);
 	end
