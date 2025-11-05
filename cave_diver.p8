@@ -55,13 +55,11 @@ end
 
 -->8
 function make_cave()
-	time_counter = 0;
-	
 	columns = {
 		{ top = 30, bottom = 30 }
 	};
 
-	column_width = 2;
+	column_width = 4;
 
 	for i=1,128/column_width do
 		add_cave_column();
@@ -71,11 +69,9 @@ end
 function add_cave_column()
 	local min_height = 10;
 
-	-- local new_bottom_height = flr(rnd(20));
-
 	local new_column = {
-		top = columns[#columns].top + -3 + rnd(6),
-		bottom = columns[#columns].bottom + -3 + rnd(6)
+		top = mid(0, columns[#columns].top - 3 + rnd(6), 52),
+		bottom = mid(0, columns[#columns].bottom - 3 + rnd(6), 52)
 	};
 
 	for i=1,column_width do
@@ -84,16 +80,12 @@ function add_cave_column()
 end
 
 function move_cave()
-	time_counter += 1;
-
-	if (time_counter % 2) then
-		-- delete first column
-		for i=1,column_width do
-			del(columns, columns[1]);
-		end
-
-		add_cave_column();
+	-- delete first column
+	for i=1,column_width do
+		del(columns, columns[1]);
 	end
+
+	add_cave_column();
 end
 
 function draw_cave()
