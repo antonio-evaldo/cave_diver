@@ -13,8 +13,6 @@ end
 function add_cave_column()
 	local min_height = 10;
 
-	local new_bottom_height = flr(rnd(20));
-
 	local new_column = {
 		top = columns[#columns].top + flr(-3 + rnd(6)),
 		bottom = columns[#columns].bottom + flr(-3 + rnd(6))
