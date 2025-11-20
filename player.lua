@@ -9,8 +9,7 @@ function make_player()
 			dead = 4
 		},
 		speed = 2,
-		score = 0,
-		hitbox_bottom = 8 -- coordenada y da hitbox desejada, contando a partir do topo do sprite.
+		score = 0
 	}
 end
 
@@ -26,10 +25,27 @@ function move_and_listen_to_player()
 end
 
 function check_hit()
-	local ceil_hit = player.y < 0
-	local floor_hit = player.y + player.hitbox_bottom > 128
+	local hit = false
 
-	if ceil_hit or floor_hit then
+	-- top hitbox
+	for i = player.x + 2, player.x + 6 do
+		local top_column_below_player = columns[i + 1].top_height >= player.y
+
+		if top_column_below_player then
+			hit = true
+		end
+	end
+
+	-- bottom hitbox
+	for i = player.x + 2, player.x + 6 do
+		local bottom_column_above_player = (128 - columns[i + 1].bottom_height) <= player.y + 8
+
+		if bottom_column_above_player then
+			hit = true
+		end
+	end
+
+	if hit then
 		game_over = true
 	end
 end

@@ -14,17 +14,20 @@ end
 
 function add_cave_column()
 	local last_column = columns[#columns]
-	-- -3 a 3
-	local variation = -3 + flr(rnd(6))
 
 	local new_column = {
-		top_height = mid(10, last_column.top_height + variation, 52),
-		bottom_height = mid(10, last_column.bottom_height + variation, 52)
+		top_height = mid(10, last_column.top_height + get_height_variation(), 55),
+		bottom_height = mid(10, last_column.bottom_height + get_height_variation(), 55)
 	}
 
 	for i = 1, column_width do
 		add(columns, new_column)
 	end
+end
+
+function get_height_variation()
+	-- -3 a 3
+	return -3 + flr(rnd(7))
 end
 
 function move_cave()
