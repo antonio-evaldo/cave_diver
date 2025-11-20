@@ -1,51 +1,53 @@
+#include player.lua
+
 function make_cave()
 	columns = {
 		{ top = 30, bottom = 30 }
-	};
+	}
 
-	column_width = 4;
+	column_width = 2
 
-	for i=1,128/column_width do
-		add_cave_column();
+	for i = 1, 128 / column_width do
+		add_cave_column()
 	end
 end
 
 function add_cave_column()
-	local min_height = 10;
+	local min_height = 10
 
 	local new_column = {
 		top = mid(0, columns[#columns].top - 3 + rnd(6), 52),
 		bottom = mid(0, columns[#columns].bottom - 3 + rnd(6), 52)
-	};
+	}
 
-	for i=1,column_width do
-		add(columns, new_column);
+	for i = 1, column_width do
+		add(columns, new_column)
 	end
 end
 
 function move_cave()
-	-- delete first column
-	for i=1,column_width do
-		del(columns, columns[1]);
+	-- delete first column(s)
+	for i = 1, column_width do
+		del(columns, columns[1])
 	end
 
-	add_cave_column();
+	add_cave_column()
 end
 
 function draw_cave()
-	local cave_color = 1;
+	local cave_color = 1
 
-	for i=1,#columns do
+	for i = 1, #columns do
 		line(
-			i-1, 0,
-			i-1, columns[i].top,
+			i - 1, 0,
+			i - 1, columns[i].top,
 			cave_color
-		);
+		)
 
 		line(
-			i-1, 127,
-			i-1, 127 - columns[i].bottom,
+			i - 1, 127,
+			i - 1, 127 - columns[i].bottom,
 			cave_color
-		);
+		)
 	end
 end
