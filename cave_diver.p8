@@ -1,6 +1,9 @@
 pico-8 cartridge // http://www.pico-8.com
 version 43
 __lua__
+--cave diver
+--by antonio evaldo
+
 function init_game()
 	game_over = false
 	make_player()

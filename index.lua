@@ -1,3 +1,6 @@
+--cave diver
+--by antonio evaldo
+
 #include player.lua
 #include cave.lua
 
