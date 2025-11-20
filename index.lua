@@ -11,13 +11,11 @@ function _update()
 	if not game_over then
 		move_and_listen_to_player()
 		move_cave()
+		check_hit()
 	end
-
-	check_hit()
 end
 
 function _draw()
-	--clear screen
 	cls(12)
 	draw_player()
 	draw_cave()

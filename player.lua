@@ -27,26 +27,13 @@ end
 function check_hit()
 	local hit = false
 
-	-- top hitbox
-	for i = player.x + 2, player.x + 6 do
+	for i = player.x + 2, player.x + 5 do
 		local top_column_below_player = columns[i + 1].top_height >= player.y
-
-		if top_column_below_player then
-			hit = true
-		end
-	end
-
-	-- bottom hitbox
-	for i = player.x + 2, player.x + 6 do
 		local bottom_column_above_player = (128 - columns[i + 1].bottom_height) <= player.y + 8
 
-		if bottom_column_above_player then
-			hit = true
+		if top_column_below_player or bottom_column_above_player then
+			game_over = true
 		end
-	end
-
-	if hit then
-		game_over = true
 	end
 end
 
