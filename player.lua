@@ -22,6 +22,8 @@ function move_and_listen_to_player()
 	end
 
 	player.y += player.dy
+
+	player.score += player.speed
 end
 
 function check_hit()

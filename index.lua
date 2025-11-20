@@ -1,10 +1,14 @@
 #include player.lua
 #include cave.lua
 
-function _init()
+function init_game()
 	game_over = false
 	make_player()
 	make_cave()
+end
+
+function _init()
+	init_game()
 end
 
 function _update()
@@ -12,6 +16,10 @@ function _update()
 		move_and_listen_to_player()
 		move_cave()
 		check_hit()
+	else
+		if btn(❎) then
+			init_game()
+		end
 	end
 end
 
@@ -19,4 +27,12 @@ function _draw()
 	cls(12)
 	draw_player()
 	draw_cave()
+
+	if not game_over then
+		print("score:" .. player.score, 2, 2, 7)
+	else
+		print("game over!", 44, 44, 0)
+		print("your score:" .. player.score, 34, 54, 0)
+		print("press ❎ to play again!", 18, 72, 0)
+	end
 end
