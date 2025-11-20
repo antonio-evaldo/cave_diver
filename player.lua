@@ -19,6 +19,7 @@ function move_and_listen_to_player()
 
 	if btnp(2) then
 		player.dy -= 1.5
+		sfx(0)
 	end
 
 	player.y += player.dy
@@ -35,6 +36,7 @@ function check_hit()
 
 		if top_column_below_player or bottom_column_above_player then
 			game_over = true
+			sfx(1)
 		end
 	end
 end
