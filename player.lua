@@ -15,7 +15,7 @@ function make_player()
 end
 
 function move_and_listen_to_player()
-	gravity = 0.15
+	local gravity = 0.15
 	player.dy += gravity
 
 	if btnp(2) then

@@ -2,7 +2,7 @@
 
 function make_cave()
 	columns = {
-		{ top = 30, bottom = 30 }
+		{ top_height = 30, bottom_height = 30 }
 	}
 
 	column_width = 2
@@ -13,11 +13,13 @@ function make_cave()
 end
 
 function add_cave_column()
-	local min_height = 10
+	local last_column = columns[#columns]
+	-- -3 a 3
+	local variation = -3 + flr(rnd(6))
 
 	local new_column = {
-		top = mid(0, columns[#columns].top - 3 + flr(rnd(6)), 52),
-		bottom = mid(0, columns[#columns].bottom - 3 + flr(rnd(6)), 52)
+		top_height = mid(10, last_column.top_height + variation, 52),
+		bottom_height = mid(10, last_column.bottom_height + variation, 52)
 	}
 
 	for i = 1, column_width do
@@ -26,7 +28,6 @@ function add_cave_column()
 end
 
 function move_cave()
-	-- delete first column(s)
 	for i = 1, column_width * player.speed do
 		del(columns, columns[1])
 	end
@@ -42,13 +43,13 @@ function draw_cave()
 	for i = 1, #columns do
 		line(
 			i - 1, 0,
-			i - 1, columns[i].top,
+			i - 1, columns[i].top_height,
 			cave_color
 		)
 
 		line(
 			i - 1, 127,
-			i - 1, 127 - columns[i].bottom,
+			i - 1, 127 - columns[i].bottom_height,
 			cave_color
 		)
 	end
